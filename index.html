@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./quizup.css">
+</head>
+
+<body>
+    <section id="homepage" class="section1">
+        <p class="hello">Hello!</p>
+        <p>Welcome to Quizup</p> <br> <br><br> <br>
+        <input class="username" type="text" placeholder="Create a username here e.g. Tonia" id="username">
+        <i id="error" style="color: red; font-size: 0.7rem; margin-bottom: 5px;"></i>
+        <button onclick="movetosubject()" class="getstarted">Get started</button>
+    </section>
+    <section class="section2" id="section2">
+        <p>Hey</p>
+        <p id="displayusername"></p>
+        <p style="margin-bottom: 1rem;">Get ready to test your knowledge!</p>
+        <div class="allsubject">
+            <div onclick="mathematics()" class="subject" id="mathematics">Mathematics</div>
+            <div onclick="displayscience()" class="subject" id="science">Science</div>
+            <div onclick="displaygeneralknowledge()" class="subject" id="history">History</div>
+            <div onclick="displayenglish()" class="subject" id="english">English</div>
+            <div onclick="displaygeography()" class="subject" id="geography">Geography</div>
+            <div onclick="displayphilosophy()" class="subject" id="philosophy">Philosophy</div>
+        </div>
+    </section>
+    <section class="section5" id="section5">
+        <p style="text-align: center; font-weight: 500;" > PREPARE TO TEST YOUR KNOWLEDGE!</p><br>
+        <u style="display: flex; justify-content: center; font-weight: 600;">Instructions</u><br>
+        <p>*Time's Challenge: You have 20 seconds to answer each question. Make every second count! <br><br>
+
+            *Quiz Length: Each subject consists of 10 questions. Stay focused! <br><br>
+    
+            *Read Carefully: Read each question thoroughly before selecting your answer. <br><br>
+    
+            *Choose Wisely: Select only one answer per question. <br><br>
+    
+            <span style="font-weight: 500;">*No Looking Back:</span> Once you've submitted an answer, you cannot change it. <br><br>
+    
+            *Good Luck!: Your score will be displayed at the end of the quiz.</p><br><br><br>
+
+            <button onclick="startquiz()" class="startquiz">Start Quiz</button>
+    </section>
+    <section id="section3" class="section3">
+        <div class="questionbox">
+            <div id="timer"></div>
+            <p class="question">Question 0<span id="questionno"></span></p>
+            <p style="color:  rgb(39, 166, 216); margin-bottom: 1vh; font-size: 1.7vh;">Quizup</p>
+            <hr>
+            <div id="question"></div>
+        </div>
+        <div class="options">
+            <div id="options1"></div>
+        </div>
+        <div class="options">
+            <div id="options2"></div>
+        </div>
+        <div class="options">
+            <div id="options3"></div>
+        </div>
+        <div class="options">
+            <div id="options4"></div>
+        </div>
+        <br>
+
+        <div class="next" onclick="nextquestion()">Next</div>
+    </section>
+    <section id="section4" class="section4">
+        <p style="color: rgb(70, 70, 70);">Result</p> <br>
+        <div class="circleans">
+
+            <span id="circleansmain" style="font-size: 3rem; margin-bottom: 1rem;"></span>
+            <span id="circleans" style="color: rgb(70, 70, 70);"></span>
+        </div>
+        <button class="startagain" onclick="startagain()" >Start again</button>
+    </section>
+</body>
+<script src="./quizup.js"></script>
+
+</html>
