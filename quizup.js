@@ -26,15 +26,20 @@ let allquestions = [];
 let currentquestion = 0;
 let score = 0;
 let countdown = 60;
+let time;
 let changeno = 0;
 function movetosubject() {
-    if (username.value == '') {
+    let createusername = username.value
+    if (createusername == '') {
         displayerror.innerText = 'pls create a username';
         return;
     } else {
         document.getElementById('homepage').style.display = 'none';
         section2.style.display = 'flex';
-        displayusername.innerHTML = username.value;
+
+        localStorage.setItem('setusername', createusername)
+        let getusername = localStorage.getItem('setusername')
+        displayusername.innerHTML = getusername;
     }
 }
 
@@ -96,7 +101,7 @@ function mathematics() {
         }
     ];
 
-    localStorage.setItem('savesubject', mathematics )
+    localStorage.setItem('savesubject', mathematics)
     section5.style.display = 'block'
     section2.style.display = 'none'; section3.style.display = 'none'
     science.style.display = 'none'; history.style.display = 'none';
@@ -159,7 +164,7 @@ function displayscience() {
             answer: "3" // Correct answer is Nucleus
         }
     ];
-        localStorage.setItem('savesubject', displayscience )
+    localStorage.setItem('savesubject', displayscience)
     section5.style.display = 'block'
     section2.style.display = 'none'; section3.style.display = 'none'
     science.style.display = 'none'; history.style.display = 'none';
@@ -222,7 +227,7 @@ function displaygeneralknowledge() {
             answer: "2" // Correct answer is Diamond
         }
     ];
-        localStorage.setItem('savesubject', displaygeneralknowledge )
+    localStorage.setItem('savesubject', displaygeneralknowledge)
     section5.style.display = 'block'
     section2.style.display = 'none'; section3.style.display = 'none'
     science.style.display = 'none'; history.style.display = 'none';
@@ -290,7 +295,7 @@ function displayenglish() {
             answer: "1" // Correct answer is Hard
         }
     ];
-        localStorage.setItem('savesubject', displayenglish )
+    localStorage.setItem('savesubject', displayenglish)
     section5.style.display = 'block'
     section2.style.display = 'none'; section3.style.display = 'none'
     science.style.display = 'none'; history.style.display = 'none';
@@ -353,7 +358,7 @@ function displaygeography() {
             answer: "1" // Correct answer is Portuguese
         }
     ];
-    localStorage.setItem('savesubject', displaygeography )
+    localStorage.setItem('savesubject', displaygeography)
     section5.style.display = 'block'
     section2.style.display = 'none'; section3.style.display = 'none'
     science.style.display = 'none'; history.style.display = 'none';
@@ -416,7 +421,7 @@ function displayphilosophy() {
             answer: "2" // Correct answer is Free Will
         }
     ];
-    localStorage.setItem('savesubject', displayphilosophy )
+    localStorage.setItem('savesubject', displayphilosophy)
     section2.style.display = 'none'; section3.style.display = 'none'
     section5.style.display = 'block'
     science.style.display = 'none'; history.style.display = 'none';
@@ -424,34 +429,18 @@ function displayphilosophy() {
     philosophy.style.display = 'none'; mathematics1.style.display = 'none';
     currentquestion = 0;
     score = 0;
-    // showtimer()
     displayquestion()
 }
 
-function startquiz(){
-   let selectedsubject =  localStorage.getItem('savesubject')
+function startquiz() {
+    let selectedsubject = localStorage.getItem('savesubject')
     section5.style.display = 'none';
     section3.style.display = 'block';
     displayquestion(selectedsubject);
     showtimer()
-}
-
-function showtimer() {
-    let countdown1 = setInterval(() =>{
-        if (countdown <= 0) {
-            section3.style.display = 'none'
-            section4.style.display = 'block'
-            displayanswer()
-            return
-        }
-
-        timer.innerHTML = countdown;
-        countdown--;
-    },2000)
-    console.log(countdown1);
-    
 
 }
+
 
 
 
@@ -465,28 +454,49 @@ function displayanswer() {
     section4.style.display = 'block';
 }
 
+function showtimer() {
+    let countdown1 = setInterval(() => {
+        if (countdown <= 0) {
+            section3.style.display = 'none'
+            section4.style.display = 'block'
+            displayanswer()
+            return
+        } else {
+            countdown--;
+            displaytimer(time)
+
+        }
+
+    }, 1000)
+    console.log(countdown1);
+
+
+}
+function displaytimer(time) {
+    timer.innerHTML = countdown;
+
+}
 function displayquestion() {
     if (currentquestion >= allquestions.length) {
         displayanswer()
+
         return;
     }
     questionno.innerHTML = changeno++;
 
-
     questionhtml.innerHTML = allquestions[currentquestion].question;
     option1.innerHTML =
-        `<input type="radio" name="answer" value="0">${allquestions[currentquestion].options[0]}`
+        `<label for="answer0"><input type="radio" id="answer0" name="answer" value="0">${allquestions[currentquestion].options[0]}</label>`
         ;
     option2.innerHTML =
-        `<input type="radio" name="answer" value="1">${allquestions[currentquestion].options[1]}`
+        `<label for="answer1"><input type="radio" id="answer1" name="answer" value="1">${allquestions[currentquestion].options[1]}</label>`
         ;
     option3.innerHTML =
-        `<input type="radio" name="answer" value="2">${allquestions[currentquestion].options[2]}`
+        `<label for="answer2"><input type="radio" id="answer2" name="answer" value="2">${allquestions[currentquestion].options[2]}</label>`
         ;
     option4.innerHTML =
-        `<input type="radio" name="answer" value="3">${allquestions[currentquestion].options[3]}`
+        `<label for="answer3"><input type="radio" id="answer3" name="answer" value="3">${allquestions[currentquestion].options[3]}</label>`
         ;
-    showtimer()
 
 };
 function nextquestion() {
@@ -501,8 +511,9 @@ function nextquestion() {
         currentquestion++
     }
     displayquestion();
-    // showtimer()
+
 }
-function startagain(){
+function startagain() {
     window.location.reload();
 }
+
