@@ -470,7 +470,6 @@ function showtimer() {
     }, 1000)
     console.log(countdown1);
 
-
 }
 function displaytimer(time) {
     timer.innerHTML = countdown;
